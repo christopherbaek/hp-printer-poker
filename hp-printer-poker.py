@@ -16,7 +16,7 @@ def main(argv):
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         
             # connect
-            print 'connecting to {}:{}'.format(IP_ADDRESS, port)
+            print('connecting to {}:{}'.format(IP_ADDRESS, port))
             sock.connect((IP_ADDRESS, port))
 
             try:
