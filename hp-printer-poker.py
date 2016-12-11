@@ -11,6 +11,8 @@ INTERVAL_SECONDS = 5
 
 def main(argv):
     while True:
+        print('poking printer')
+
         for port in PORTS:
             # create a socket
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -29,6 +31,7 @@ def main(argv):
                 # response not needed; close the socket
                 sock.close()
 
+        print('sleeping for {} seconds'.format(INTERVAL_SECONDS))
         time.sleep(INTERVAL_SECONDS)
 
 
