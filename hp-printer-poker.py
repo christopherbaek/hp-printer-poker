@@ -21,7 +21,7 @@ def main(argv):
 
             try:
                 # send something
-                sock.sendall('stay awake')
+                sock.sendall('stay awake'.encode('utf-8'))
                 
                 # stay connected
                 time.sleep(CONNECTION_DURATION_SECONDS)
