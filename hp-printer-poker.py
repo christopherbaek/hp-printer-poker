@@ -2,6 +2,7 @@
 A script to try to keep an HP printer from going to sleep
 """
 
+import logging
 import socket
 import sys
 import time
@@ -16,32 +17,46 @@ CONNECTION_DURATION_SECONDS = 3
 INTERVAL_SECONDS = 5
 
 
+#-------------------------------------------------------------------------------
+# LOGGING
+#-------------------------------------------------------------------------------
+LOGGER = logging.getLogger('spam_application')
+LOGGER.setLevel(logging.DEBUG)
+
+FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+CONSOLE_HANDLER = logging.StreamHandler()
+CONSOLE_HANDLER.setLevel(logging.DEBUG)
+CONSOLE_HANDLER.setFormatter(FORMATTER)
+LOGGER.addHandler(CONSOLE_HANDLER)
+
+
 def main(argv):
     """
     MAIN
     """
     while True:
-        print('poking printer')
+        LOGGER.info('poking printer')
 
         for port in PORTS:
             # create a socket
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        
+
             # connect
-            print('connecting to {}:{}'.format(IP_ADDRESS, port))
+            LOGGER.debug('connecting to %s:%d', IP_ADDRESS, port)
             sock.connect((IP_ADDRESS, port))
 
             try:
                 # send something
                 sock.sendall('stay awake'.encode('utf-8'))
-                
+
                 # stay connected
                 time.sleep(CONNECTION_DURATION_SECONDS)
             finally:
                 # response not needed; close the socket
                 sock.close()
 
-        print('sleeping for {} seconds'.format(INTERVAL_SECONDS))
+        LOGGER.info('sleeping for %d seconds', INTERVAL_SECONDS)
         time.sleep(INTERVAL_SECONDS)
 
 
