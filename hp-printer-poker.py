@@ -4,7 +4,6 @@ A script to try to keep an HP printer from going to sleep
 
 import logging
 import socket
-import sys
 import time
 
 
@@ -31,7 +30,7 @@ CONSOLE_HANDLER.setFormatter(FORMATTER)
 LOGGER.addHandler(CONSOLE_HANDLER)
 
 
-def main(argv):
+def main():
     """
     MAIN
     """
@@ -61,4 +60,4 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    main()
