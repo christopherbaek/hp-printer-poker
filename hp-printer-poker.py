@@ -1,3 +1,7 @@
+"""
+A script to try to keep an HP printer from going to sleep
+"""
+
 import socket
 import sys
 import time
@@ -10,6 +14,9 @@ INTERVAL_SECONDS = 5
 
 
 def main(argv):
+    """
+    MAIN
+    """
     while True:
         print('poking printer')
 
